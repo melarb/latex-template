@@ -1,0 +1,386 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{matlab-prettifier}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Northeastern University}
+\rhead{Department of Electrical and Computer Engineering}
+\lfoot{EECE 4649: Biomedical Imaging}
+\rfoot{Page \thepage}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+\begin{document}
+%\tableofcontents
+%\newpage
+
+\title{HW 1}
+\author{Muhammad Elarbi}
+\date{Summer 1 2024}
+\maketitle
+
+\section*{Class Information}
+\textbf{Class:} EECE 4649: Biomedical Imaging \\
+\textbf{Instructor:} Charles A. DiMarzio \\
+\textbf{Semester:} Summer 1 2024 \\
+\textbf{Name:} Muhammad Elarbi
+
+\newpage
+\section*{Solution(s)}
+\section*{Problem 1}
+\subsection*{(a)}
+\section*{Beer's Law:}
+
+\[ P(z) = P(0) \cdot e^{-\mu_a \cdot z} \]
+
+\textbf{where:}
+\begin{itemize}
+    \item \( P(z) \): The power of the light (or X-ray) after traveling a distance \( z \) through the medium. This is the power detected after attenuation.
+    \item \( P(0) \): Initial power (before entering the medium).
+    \item \( \mu_a \): Absorption coefficient
+    \item \( z \): Distance to be solved. This is the distance that the light travels through the medium. In our context, this is the depth at which the mirror is placed in the fluid.
+\end{itemize}
+
+\subsection*{What We Are Solving For:}
+\textbf{We are solving for \( z \)}, which represents the maximum depth (distance we are solving for) at which the mirror can be placed below the surface of the fluid such that the reflected light can still be detected.
+
+
+\textbf{Given Data From The Problem}:
+\begin{itemize}
+    \item Initial power, \( P(0) \): \( 0.1 \text{ mW} = 0.1 \times 10^{-3} \text{ W} \)
+    \item Minimum detectable power (from Detector), \( P(2z) \): \( 1 \text{ nW} = 1 \times 10^{-9} \text{ W} \)
+    \item Wavelengths: 650 nm and 450 nm
+\end{itemize}
+
+\subsection*{Beer's Law for Round Trip:}
+Since the problem states the light travels to the mirror and back, \textbf{the distance is \( 2z \)}. This changes the Beer's Law equation we are working with to be:
+
+\[ P(2z) = P(0) \cdot e^{-\mu_a \cdot 2z} \]
+
+\textbf{where:}
+\begin{itemize}
+    \item \( P(2z) \): Detected power after traveling to the mirror and back.
+\end{itemize}
+
+\subsection*{Rearranging Beer's Law to Solve for \( z \):}
+By rearranging Beer's Law and using the natural logarithm, we can solve for the maximum depth \( z \) at which the mirror can be placed. All we need to do is perform some algebraic manipulation and isolate \( z \) on one side of the equation:
+
+\begin{enumerate}
+    \item \textbf{Start with the equation}:
+    \[ P(2z) = P(0) \cdot e^{-\mu_a \cdot 2z} \]
+
+    \item \textbf{ We can substitute in the given values for P(2z) and P(0) to make things easier}:
+    \[ 1 \times 10^{-9} = 0.1 \times 10^{-3} \cdot e^{-\mu_a \cdot 2z} \]
+
+    \item \textbf{Divide both sides by \( P(0) \)}:
+    \[ \frac{1 \times 10^{-9}}{0.1 \times 10^{-3}} = e^{-\mu_a \cdot 2z} \]
+    \[ 10^{-6} = e^{-\mu_a \cdot 2z} \]
+
+    \item \textbf{Take the natural logarithm (ln) of both sides to solve for the exponent}:
+    \[ \ln(10^{-6}) = \ln(e^{-\mu_a \cdot 2z}) \]
+    \[ -6 \ln(10) = -\mu_a \cdot 2z \]
+
+    \item \textbf{Solve for \( z \)}:
+    \[ -6 \cdot 2.3026 = -\mu_a \cdot 2z \]
+    \[ 6 \cdot 2.3026 = \mu_a \cdot 2z \]
+    \[ 13.8156 = \mu_a \cdot 2z \]
+    \[ 2z = \frac{13.8156}{\mu_a} \]
+    \[ z = \frac{13.8156}{2 \cdot \mu_a} \]
+\end{enumerate}
+
+Now, we can use the above equation to solve for the $z$ values in both water and blood at both wavelengths.
+
+\subsection*{Calculation for Water (H\textsubscript{2}O) at 650 nm:}
+\textbf{Absorption coefficient, \( \mu_a\) (Estimate visually from the graph)}:
+\begin{itemize}
+    \item For water at 650 nm: \( \mu_a \approx 10^{-2.5} \text{ cm}^{-1} \approx 3.162 \times 10^{-3} \text{ cm}^{-1} \)
+\end{itemize}
+
+\textbf{Calculate \( z \)}:
+\[ z = \frac{13.8156}{2 \cdot \mu_a} \]
+\[ z = \frac{13.8156}{2 \cdot 3.162 \times 10^{-3}} \]
+\[ z = \frac{13.8156}{0.006324} \]
+\[ z \approx 2184.8 \text{ cm} \approx 21.85 \text{ m} \]
+
+\subsection*{Calculation for Water (H\textsubscript{2}O) at 450 nm:}
+\textbf{Absorption coefficient, \( \mu_a\) (Estimate visually from the graph)}:
+\begin{itemize}
+    \item For water at 450 nm: \( \mu_a \approx 10^{-1.8} \text{ cm}^{-1} \approx 1.584 \times 10^{-2} \text{ cm}^{-1} \)
+\end{itemize}
+
+\textbf{Calculate \( z \)}:
+\[ z = \frac{13.8156}{2 \cdot \mu_a} \]
+\[ z = \frac{13.8156}{2 \cdot 1.584 \times 10^{-2}} \]
+\[ z = \frac{13.8156}{0.031697} \]
+\[ z \approx 364 \text{ cm} = 3.64 \text{ m} \]
+
+\subsection*{Note - How to calculate Absorption Coefficients for Blood:}
+The assignment says to assume equal concentrations of Oxy-Hemoglobin (HbO\(_2\)) and Deoxy-Hemoglobin (Hb). Therefore, we can calculate the average absorption coefficient for both wavelengths by \textbf{averaging the values for Oxy- and Deoxy-Hemoglobin from the figure}.
+
+\subsection*{Calculation for Blood at 650 nm:}
+
+\textbf{Absorption coefficient, \( \mu_a\) (Averaged)}:
+\[ \mu_a \text{ (HbO}_2) \approx 10^3 \text{ cm}^{-1} \]
+\[ \mu_a \text{ (Hb)} \approx 10^2.5 \text{ cm}^{-1} \approx 3.16 \times 10^2 \text{ cm}^{-1} \]
+\[ \mu_a \text{ (average)} \approx \frac{10^3 + 3.16 \times 10^2}{2} = 5.58 \times 10^2 \text{ cm}^{-1} \]
+
+\textbf{Calculate \( z \)}:
+\[ z = \frac{13.8156}{2 \cdot \mu_a \text{(average)}} \]
+\[ z = \frac{13.8156}{2 \cdot 5.58 \times 10^2} \]
+\[ z = \frac{13.8156}{1116.0} \]
+\[ z \approx 0.0123 \text{ cm} = 0.123 \text{ mm} \]
+
+\subsection*{Calculation for Blood at 450 nm:}
+
+\textbf{Absorption coefficient, \( \mu_a\) (Averaged)}:
+\[ \mu_a \text{ (HbO}_2) \approx 10^3.5 \text{ cm}^{-1} \approx 3.16 \times 10^3 \text{ cm}^{-1} \]
+\[ \mu_a \text{ (Hb)} \approx 10^2.8 \text{ cm}^{-1} \approx 6.31 \times 10^2 \text{ cm}^{-1} \]
+\[ \mu_a \text{ (average)} \approx \frac{3.16 \times 10^3 + 6.31 \times 10^2}{2} = 1.89 \times 10^3 \text{ cm}^{-1} \]
+
+
+
+\textbf{Calculate \( z \)}:
+\[ z = \frac{13.8156}{2 \cdot \mu_a \text{(average)}} \]
+\[ z = \frac{13.8156}{2 \cdot 1.89 \times 10^3} \]
+\[ z = \frac{13.8156}{3780.0} \]
+\[ z \approx 0.0036 \text{ cm} = 0.036 \text{ mm} \]
+
+\subsection*{Summary:}
+\begin{itemize}
+    \item \textbf{Water at 650 nm}: \( z \approx 21.85 \text{ m} \)
+    \item \textbf{Water at 450 nm}: \( z \approx 3.64 \text{ m} \)
+    \item \textbf{Blood at 650 nm}: \( z \approx 0.123 \text{ mm} \)
+    \item \textbf{Blood at 450 nm}: \( z \approx 0.036 \text{ mm} \)
+\end{itemize}
+
+\subsection*{(b)}
+These results show that red light (650 nm) penetrates deeper than blue light (450 nm) in both water and blood. This is because red light is less absorbed by these media compared to blue light.
+
+\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\section*{Problem 2}
+\subsection*{(a)}
+\subsection*{Given Data:}
+\begin{itemize}
+    \item Wavelength of X-ray beams, $\lambda = 0.1 \, \text{nm}$
+    \item Initial intensity of X-ray beams, $I_0$
+    \item Phantom thickness, $10 \, \text{cm}$
+    \item Diameter of bone, $3 \, \text{cm}$
+    \item Mass Absorption Coefficient for soft tissue, $\mu/\rho = 5.38 \, \text{cm}^2/\text{g}$
+    \item Mass Absorption Coefficient for bone, $\mu/\rho = 28.51 \, \text{cm}^2/\text{g}$
+    \item Density of soft tissue, $\rho_{\text{tissue}} = 1.06 \, \text{g/cm}^3$
+    \item Density of bone, $\rho_{\text{bone}} = 1.92 \, \text{g/cm}^3$
+\end{itemize}
+
+\subsection*{Calculation of Attenuation for $I_1$ and $I_2$:}
+
+\subsubsection*{For beam $I_1$:}
+The beam $I_1$ passes through only the soft tissue.
+
+\begin{enumerate}
+    \item \textbf{Path Length through Soft Tissue:}
+    \[
+    d_{\text{tissue}} = 10 \, \text{cm}
+    \]
+
+    \item \textbf{Attenuation Coefficient for Soft Tissue:}
+    \[
+    \mu_{\text{tissue}} = \left(\frac{\mu}{\rho}\right)_{\text{tissue}} \times \rho_{\text{tissue}} = 5.38 \, \text{cm}^2/\text{g} \times 1.06 \, \text{g/cm}^3 = 5.7028 \, \text{cm}^{-1}
+    \]
+
+    \item \textbf{Total Attenuation for $I_1$:}
+    \[
+    I_1 = I_0 \, e^{-\mu_{\text{tissue}} \, d_{\text{tissue}}} = I_0 \, e^{-5.7028 \times 10}
+    \]
+    \[
+    I_1 = I_0 \, e^{-57.028}
+    \]
+\end{enumerate}
+
+\subsubsection*{For beam $I_2$:}
+The beam $I_2$ passes through both the bone and the soft tissue.
+
+\begin{enumerate}
+    \item \textbf{Path Length through Bone:}
+    \[
+    d_{\text{bone}} = 3 \, \text{cm}
+    \]
+
+    \item \textbf{Path Length through Soft Tissue (excluding bone):}
+    \[
+    d_{\text{tissue}} = 10 \, \text{cm} - 3 \, \text{cm} = 7 \, \text{cm}
+    \]
+
+    \item \textbf{Attenuation Coefficient for Bone:}
+    \[
+    \mu_{\text{bone}} = \left(\frac{\mu}{\rho}\right)_{\text{bone}} \times \rho_{\text{bone}} = 28.51 \, \text{cm}^2/\text{g} \times 1.92 \, \text{g/cm}^3 = 54.7392 \, \text{cm}^{-1}
+    \]
+
+    \item \textbf{Total Attenuation for $I_2$:}
+    \[
+    I_2 = I_0 \, e^{-(\mu_{\text{bone}} \, d_{\text{bone}} + \mu_{\text{tissue}} \, d_{\text{tissue}})}
+    \]
+    \[
+    I_2 = I_0 \, e^{-(54.7392 \times 3 + 5.7028 \times 7)}
+    \]
+    \[
+    I_2 = I_0 \, e^{-(164.2176 + 39.9196)}
+    \]
+    \[
+    I_2 = I_0 \, e^{-204.1372}
+    \]
+\end{enumerate}
+
+\subsection*{Summary:}
+\begin{itemize}
+    \item \textbf{Total Attenuation for $I_1$:}
+    \[
+    I_1 = I_0 \, e^{-57.028}
+    \]
+
+    \item \textbf{Total Attenuation for $I_2$:}
+    \[
+    I_2 = I_0 \, e^{-204.1372}
+    \]
+\end{itemize}
+
+\subsection*{(b)}
+\textbf{Synopsis/Logic}:
+The process begins by defining key parameters such as the thickness of the soft tissue, the diameter of the bone, and the attenuation coefficients for both materials. The code then creates a series of positions along the length of the tissue sample. For each position, the code checks if the position falls within the region containing the bone. If it does, the code calculates the attenuation by considering both the bone and the surrounding soft tissue. If the position falls outside the bone region, only the soft tissue's attenuation is considered. The attenuation is calculated using Beer's Law, represented by the exponential decay formula \( I = I_0 e^{-\mu x} \), where \( \mu \) is the attenuation coefficient and \( x \) is the thickness of the material. Finally, the results are visualized using a grayscale plot, where the intensity of the color indicates the level of attenuation, with darker regions representing higher attenuation due to the presence of bone.
+
+
+\textbf{Code}:
+
+\begin{lstlisting}[style=Matlab-editor]
+% X-ray Attenuation through Tissue with Bone
+% This script calculates and visualizes the attenuation of X-rays as they pass through
+% a 10 cm thick tissue sample containing a 3 cm diameter bone.
+%
+% Author: Muhammad Elarbi
+% Email: elarbi.m@northeastern.edu
+% Date Created: May 13, 2024
+% Last Modified: May 14, 2024
+% Course: EECE 4649: Biomedical Imaging
+% Instructor: Charles A. DiMarzio
+%
+% Usage:
+% This script models the attenuation of X-ray beams through a tissue sample with an embedded bone.
+% Run the script in MATLAB to view the output in the Command Window.
+
+% Define parameters
+tissue_thickness = 10; % cm
+bone_diameter = 3; % cm
+soft_tissue_mu = 5.7028; % cm^-1
+bone_mu = 54.7392; % cm^-1
+I0 = 1; % Initial intensity (assumed to be 1 for simplicity)
+
+% Create x positions from 0 to 10 cm
+x = linspace(0, tissue_thickness, 1000);
+
+% Initialize attenuation array
+attenuation = zeros(size(x));
+
+% Calculate attenuation for each position
+for i = 1:length(x)
+    if x(i) >= (tissue_thickness - bone_diameter) / 2 && x(i) <= (tissue_thickness + bone_diameter) / 2
+        % Passes through bone
+        attenuation(i) = I0 * exp(-bone_mu * bone_diameter - soft_tissue_mu * (tissue_thickness - bone_diameter));
+    else
+        % Passes through soft tissue only
+        attenuation(i) = I0 * exp(-soft_tissue_mu * tissue_thickness);
+    end
+end
+
+% Plot the result
+figure;
+imagesc(x, [0 1], attenuation);
+colormap('gray');
+colorbar;
+xlabel('Position (cm)');
+ylabel('Intensity');
+title('X-ray Attenuation through Tissue with Bone');
+\end{lstlisting}
+
+The figure below shows the result of the MATLAB code, visualizing the attenuation of X-rays through the tissue with an embedded bone.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{m_2024_summer1_eece4649_elarbi_hw1_q2_b.pdf}
+    \caption{X-ray Attenuation through Tissue with Bone}
+    \label{fig:attenuation}
+\end{figure}
+
+
+\newpage
+\section*{Problem 3}
+\subsection*{(a)}
+\subsection*{(b)}
+
+\newpage
+\section*{Problem 4}
+\subsection*{(a)}
+\subsection*{(b)}
+\subsection*{(c)}
+\subsection*{(d)}
+\end{document}
