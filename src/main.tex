@@ -7,8 +7,8 @@
 \usepackage{amsmath}
 \usepackage{listings}
 \usepackage{matlab-prettifier}
-
-
+\usepackage{hyperref} % for hyperlinks
+\usepackage{float} % for [H] placement option for figures
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -20,25 +20,33 @@
 \setlength{\parskip}{1em}
 
 \begin{document}
-%\tableofcontents
-%\newpage
 
-\title{HW 1}
-\author{Muhammad Elarbi}
-\date{Summer 1 2024}
+\pagenumbering{gobble} % Suppress page number on the title page - Best practice in academic and professional documents. This is a common practice and considered best practice to avoid redundancy and improve the document's aesthetic. 
+\title{Homework 1}
+\author{Muhammad Elarbi, Connor McEleney, Madison Cherry, Francisca Sepúlveda}
+\date{May 16, 2024}
 \maketitle
 
 \section*{Class Information}
 \textbf{Class:} EECE 4649: Biomedical Imaging \\
 \textbf{Instructor:} Charles A. DiMarzio \\
 \textbf{Semester:} Summer 1 2024 \\
-\textbf{Name:} Muhammad Elarbi
+\textbf{Name(s):} Muhammad Elarbi, Connor McEleney, Madison Cherry, Francisca Sepúlveda \\
+\textbf{Group:} 1
 
 \newpage
-\section*{Solution(s)}
+\pagenumbering{arabic} % Start page numbering from this page (The Table of Contents)
+\setcounter{page}{1} % Set the page number to 1 - Should appear in bottom right corner
+\tableofcontents
+
+
+\newpage
+\section*{Solutions}
 \section*{Problem 1}
-\subsection*{(a)}
-\section*{Beer's Law:}
+\addcontentsline{toc}{section}{Problem 1}
+\subsection*{Problem 1, Part (a)}
+\addcontentsline{toc}{subsection}{Problem 1, Part (a)}
+\textbf{Beer's Law}:
 
 \[ P(z) = P(0) \cdot e^{-\mu_a \cdot z} \]
 
@@ -50,7 +58,7 @@
     \item \( z \): Distance to be solved. This is the distance that the light travels through the medium. In our context, this is the depth at which the mirror is placed in the fluid.
 \end{itemize}
 
-\subsection*{What We Are Solving For:}
+\textbf{What We Are Solving For:}
 \textbf{We are solving for \( z \)}, which represents the maximum depth (distance we are solving for) at which the mirror can be placed below the surface of the fluid such that the reflected light can still be detected.
 
 
@@ -61,7 +69,7 @@
     \item Wavelengths: 650 nm and 450 nm
 \end{itemize}
 
-\subsection*{Beer's Law for Round Trip:}
+\textbf{Beer's Law for Round Trip:}
 Since the problem states the light travels to the mirror and back, \textbf{the distance is \( 2z \)}. This changes the Beer's Law equation we are working with to be:
 
 \[ P(2z) = P(0) \cdot e^{-\mu_a \cdot 2z} \]
@@ -71,14 +79,14 @@ Since the problem states the light travels to the mirror and back, \textbf{the d
     \item \( P(2z) \): Detected power after traveling to the mirror and back.
 \end{itemize}
 
-\subsection*{Rearranging Beer's Law to Solve for \( z \):}
+\textbf{Rearranging Beer's Law to Solve for \( z \):}
 By rearranging Beer's Law and using the natural logarithm, we can solve for the maximum depth \( z \) at which the mirror can be placed. All we need to do is perform some algebraic manipulation and isolate \( z \) on one side of the equation:
 
 \begin{enumerate}
     \item \textbf{Start with the equation}:
     \[ P(2z) = P(0) \cdot e^{-\mu_a \cdot 2z} \]
 
-    \item \textbf{ We can substitute in the given values for P(2z) and P(0) to make things easier}:
+    \item \textbf{ We can substitute in the given values for \( P(2z) \) and \( P(0) \) to make things easier}:
     \[ 1 \times 10^{-9} = 0.1 \times 10^{-3} \cdot e^{-\mu_a \cdot 2z} \]
 
     \item \textbf{Divide both sides by \( P(0) \)}:
@@ -99,7 +107,7 @@ By rearranging Beer's Law and using the natural logarithm, we can solve for the 
 
 Now, we can use the above equation to solve for the $z$ values in both water and blood at both wavelengths.
 
-\subsection*{Calculation for Water (H\textsubscript{2}O) at 650 nm:}
+\textbf{Calculation for Water (H\textsubscript{2}O) at 650 nm:}
 \textbf{Absorption coefficient, \( \mu_a\) (Estimate visually from the graph)}:
 \begin{itemize}
     \item For water at 650 nm: \( \mu_a \approx 10^{-2.5} \text{ cm}^{-1} \approx 3.162 \times 10^{-3} \text{ cm}^{-1} \)
@@ -111,7 +119,7 @@ Now, we can use the above equation to solve for the $z$ values in both water and
 \[ z = \frac{13.8156}{0.006324} \]
 \[ z \approx 2184.8 \text{ cm} \approx 21.85 \text{ m} \]
 
-\subsection*{Calculation for Water (H\textsubscript{2}O) at 450 nm:}
+\textbf{Calculation for Water (H\textsubscript{2}O) at 450 nm:}
 \textbf{Absorption coefficient, \( \mu_a\) (Estimate visually from the graph)}:
 \begin{itemize}
     \item For water at 450 nm: \( \mu_a \approx 10^{-1.8} \text{ cm}^{-1} \approx 1.584 \times 10^{-2} \text{ cm}^{-1} \)
@@ -123,10 +131,10 @@ Now, we can use the above equation to solve for the $z$ values in both water and
 \[ z = \frac{13.8156}{0.031697} \]
 \[ z \approx 364 \text{ cm} = 3.64 \text{ m} \]
 
-\subsection*{Note - How to calculate Absorption Coefficients for Blood:}
+\textbf{Note - How to calculate Absorption Coefficients for Blood:}
 The assignment says to assume equal concentrations of Oxy-Hemoglobin (HbO\(_2\)) and Deoxy-Hemoglobin (Hb). Therefore, we can calculate the average absorption coefficient for both wavelengths by \textbf{averaging the values for Oxy- and Deoxy-Hemoglobin from the figure}.
 
-\subsection*{Calculation for Blood at 650 nm:}
+\textbf{Calculation for Blood at 650 nm:}
 
 \textbf{Absorption coefficient, \( \mu_a\) (Averaged)}:
 \[ \mu_a \text{ (HbO}_2) \approx 10^3 \text{ cm}^{-1} \]
@@ -139,7 +147,7 @@ The assignment says to assume equal concentrations of Oxy-Hemoglobin (HbO\(_2\))
 \[ z = \frac{13.8156}{1116.0} \]
 \[ z \approx 0.0123 \text{ cm} = 0.123 \text{ mm} \]
 
-\subsection*{Calculation for Blood at 450 nm:}
+\textbf{Calculation for Blood at 450 nm:}
 
 \textbf{Absorption coefficient, \( \mu_a\) (Averaged)}:
 \[ \mu_a \text{ (HbO}_2) \approx 10^3.5 \text{ cm}^{-1} \approx 3.16 \times 10^3 \text{ cm}^{-1} \]
@@ -154,7 +162,7 @@ The assignment says to assume equal concentrations of Oxy-Hemoglobin (HbO\(_2\))
 \[ z = \frac{13.8156}{3780.0} \]
 \[ z \approx 0.0036 \text{ cm} = 0.036 \text{ mm} \]
 
-\subsection*{Summary:}
+\textbf{Summary:}
 \begin{itemize}
     \item \textbf{Water at 650 nm}: \( z \approx 21.85 \text{ m} \)
     \item \textbf{Water at 450 nm}: \( z \approx 3.64 \text{ m} \)
@@ -162,13 +170,17 @@ The assignment says to assume equal concentrations of Oxy-Hemoglobin (HbO\(_2\))
     \item \textbf{Blood at 450 nm}: \( z \approx 0.036 \text{ mm} \)
 \end{itemize}
 
-\subsection*{(b)}
-These results show that red light (650 nm) penetrates deeper than blue light (450 nm) in both water and blood. This is because red light is less absorbed by these media compared to blue light.
+\subsection*{Problem 1, Part (b)}
+\addcontentsline{toc}{subsection}{Problem 1, Part (b)}
+These results show that red light (650 nm) penetrates deeper than blue light (450 nm) in both water and blood. This is due to the lower absorption coefficients. Red light is generally more useful for deeper tissue imaging due to its greater penetration depth and lower scattering. Blue light, while limited in penetration, is valuable for surface imaging and fluorescence-based techniques. 
+
 
 \newpage
 \section*{Problem 2}
-\subsection*{(a)}
-\subsection*{Given Data:}
+\addcontentsline{toc}{section}{Problem 2}
+\subsection*{Problem 2, Part (a)}
+\addcontentsline{toc}{subsection}{Problem 2, Part (a)}
+\textbf{Given Data:}
 \begin{itemize}
     \item Wavelength of X-ray beams, $\lambda = 0.1 \, \text{nm}$
     \item Initial intensity of X-ray beams, $I_0$
@@ -180,9 +192,9 @@ These results show that red light (650 nm) penetrates deeper than blue light (45
     \item Density of bone, $\rho_{\text{bone}} = 1.92 \, \text{g/cm}^3$
 \end{itemize}
 
-\subsection*{Calculation of Attenuation for $I_1$ and $I_2$:}
+\textbf{Calculation of Attenuation for $I_1$ and $I_2$:}
 
-\subsubsection*{For beam $I_1$:}
+\textbf{For beam $I_1$:}
 The beam $I_1$ passes through only the soft tissue.
 
 \begin{enumerate}
@@ -205,7 +217,7 @@ The beam $I_1$ passes through only the soft tissue.
     \]
 \end{enumerate}
 
-\subsubsection*{For beam $I_2$:}
+\textbf{For beam $I_2$:}
 The beam $I_2$ passes through both the bone and the soft tissue.
 
 \begin{enumerate}
@@ -239,7 +251,7 @@ The beam $I_2$ passes through both the bone and the soft tissue.
     \]
 \end{enumerate}
 
-\subsection*{Summary:}
+\textbf{Summary:}
 \begin{itemize}
     \item \textbf{Total Attenuation for $I_1$:}
     \[
@@ -252,68 +264,74 @@ The beam $I_2$ passes through both the bone and the soft tissue.
     \]
 \end{itemize}
 
-\subsection*{(b)}
-\textbf{Synopsis/Logic}:
-The process begins by defining key parameters such as the thickness of the soft tissue, the diameter of the bone, and the attenuation coefficients for both materials. The code then creates a series of positions along the length of the tissue sample. For each position, the code checks if the position falls within the region containing the bone. If it does, the code calculates the attenuation by considering both the bone and the surrounding soft tissue. If the position falls outside the bone region, only the soft tissue's attenuation is considered. The attenuation is calculated using Beer's Law, represented by the exponential decay formula \( I = I_0 e^{-\mu x} \), where \( \mu \) is the attenuation coefficient and \( x \) is the thickness of the material. Finally, the results are visualized using a grayscale plot, where the intensity of the color indicates the level of attenuation, with darker regions representing higher attenuation due to the presence of bone.
-
+\subsection*{Problem 2, Part (b)}
+\addcontentsline{toc}{subsection}{Problem 2, Part (b)}
+\textbf{Synopsis}:
+The provided MATLAB script models the attenuation of X-rays through a 10 cm thick tissue sample with a 3 cm diameter bone. It calculates attenuation values at various depths, considering the differing absorption properties of bone and soft tissue. The logic involves defining nested functions to calculate the bone's length at a given depth and the corresponding attenuation. The script iterates over a range of depths, applying these functions to compute the attenuation at each point. Attenuation values are then plotted as a color bar, visually representing how X-ray intensity diminishes through the tissue and bone.
 
 \textbf{Code}:
-
 \begin{lstlisting}[style=Matlab-editor]
 % X-ray Attenuation through Tissue with Bone
 % This script calculates and visualizes the attenuation of X-rays as they pass through
 % a 10 cm thick tissue sample containing a 3 cm diameter bone.
 %
-% Author: Muhammad Elarbi
-% Email: elarbi.m@northeastern.edu
 % Date Created: May 13, 2024
-% Last Modified: May 14, 2024
+% Last Modified: May 16, 2024
 % Course: EECE 4649: Biomedical Imaging
 % Instructor: Charles A. DiMarzio
 %
 % Usage:
 % This script models the attenuation of X-ray beams through a tissue sample with an embedded bone.
 % Run the script in MATLAB to view the output in the Command Window.
+function HW1Prob2
 
-% Define parameters
-tissue_thickness = 10; % cm
-bone_diameter = 3; % cm
-soft_tissue_mu = 5.7028; % cm^-1
-bone_mu = 54.7392; % cm^-1
-I0 = 1; % Initial intensity (assumed to be 1 for simplicity)
+    % Nested function to calculate the chord length of the bone at a given depth x
+    function bone_strip_length = bone_length(x)
+        bone_center_x = 3.5; % Center position of the bone in cm
+        bone_radius = 1.5; % Radius of the bone in cm
 
-% Create x positions from 0 to 10 cm
-x = linspace(0, tissue_thickness, 1000);
-
-% Initialize attenuation array
-attenuation = zeros(size(x));
-
-% Calculate attenuation for each position
-for i = 1:length(x)
-    if x(i) >= (tissue_thickness - bone_diameter) / 2 && x(i) <= (tissue_thickness + bone_diameter) / 2
-        % Passes through bone
-        attenuation(i) = I0 * exp(-bone_mu * bone_diameter - soft_tissue_mu * (tissue_thickness - bone_diameter));
-    else
-        % Passes through soft tissue only
-        attenuation(i) = I0 * exp(-soft_tissue_mu * tissue_thickness);
+        % Check if x is outside the range of the bone
+        if x < bone_center_x - bone_radius || x > bone_center_x + bone_radius
+            bone_strip_length = 0;
+        else
+            % Calculate the chord length of the bone at position x
+            bone_strip_length = 2*sqrt(bone_radius^2-(x-bone_center_x)^2);
+        end
     end
+
+    % Nested function to calculate the attenuation at a given depth x
+    function attenuation_val = get_attenuation(x)
+        initial_irradiance = 1; % Initial irradiance of the X-ray beam
+        bone_strip_length = bone_length(x); % Length of bone at position x
+        meat_girth = 10 - bone_strip_length; % Remaining tissue thickness
+
+        % Calculate the attenuation using the Beers Law exponential decay formula
+        attenuation_val = initial_irradiance*exp(-((meat_girth)*(5.38*1.06)) - (bone_strip_length)*(28.51*1.92));
+    end
+
+    % Define the sampling interval across the 10 cm tissue sample
+    sampling_interval = linspace(0,10,1000);
+    attenuation_values = zeros(1, length(sampling_interval));
+
+    % Calculate attenuation values at each sampling point
+    for i = 1:length(sampling_interval)
+        attenuation_values(i) = get_attenuation(sampling_interval(i));
+    end
+    
+    % Plot the attenuation values as a color bar
+    imagesc(attenuation_values);
+    colorbar;
+    set(gca, 'YTick', []); % Remove y-axis marks as they are not needed
+    xlabel('Depth (cm)');
+    title('X-ray Attenuation through Tissue with Bone');
+
 end
-
-% Plot the result
-figure;
-imagesc(x, [0 1], attenuation);
-colormap('gray');
-colorbar;
-xlabel('Position (cm)');
-ylabel('Intensity');
-title('X-ray Attenuation through Tissue with Bone');
 \end{lstlisting}
-
 The figure below shows the result of the MATLAB code, visualizing the attenuation of X-rays through the tissue with an embedded bone.
 
-\begin{figure}[h!]
+\begin{figure}[H] %change to [h!] if tweaking 
     \centering
-    \includegraphics[width=\textwidth]{m_2024_summer1_eece4649_elarbi_hw1_q2_b.pdf}
+    \includegraphics[width=\textwidth]{m_2024_summer1_eece4649_hw1_q2_b.pdf}
     \caption{X-ray Attenuation through Tissue with Bone}
     \label{fig:attenuation}
 \end{figure}
@@ -321,13 +339,179 @@ The figure below shows the result of the MATLAB code, visualizing the attenuatio
 
 \newpage
 \section*{Problem 3}
-\subsection*{(a)}
-\subsection*{(b)}
+\addcontentsline{toc}{section}{Problem 3}
+\subsection*{Problem 3, Part (a)}
+\addcontentsline{toc}{subsection}{Problem 3, Part (a)}
+Refraction does not occur when the incidence angle is equal to the critical angle, which is given by:
+\[
+\theta_c = \sin^{-1}{\frac{n_1}{n_2}}
+\]
+This is equivalent as the refraction angle being equal or greater than 90°. In the medium where $n_1$ = 1.2 and $n_2$ = 2.0, the minimum angle for refraction nor occurring is:
+\[
+\theta_c = \sin^{-1}{(\frac{1.2}{2})} = 36.86\text{°}
+\]
+
+\subsection*{Problem 3, Part(b)}
+\addcontentsline{toc}{subsection}{Problem 3, Part (b)}
+\textbf{Code}:
+\begin{lstlisting}[style=Matlab-editor]
+% Date Created: May 13, 2024
+% Last Modified: May 16, 2024
+% Course: EECE 4649: Biomedical Imaging
+% Instructor: Charles A. DiMarzio
+%
+% Description:
+% This script calculates and plots the reflected intensity as a function 
+% of the angle of incidence (theta) for an optical fiber.
+% 
+% Usage:
+% Run the script in MATLAB to view the plot of reflected intensity versus 
+% angle of incidence.
+
+function HW1Prob3
+    function [ras,rap,tas,tap]=fresnel(thetad,n)
+    %
+    %  FRESNEL.M computes Fresnel Reflection and Transmission
+    %  by Chuck DiMarzio
+    %     Northeastern University
+    %     September, 2001
+    %     Based on FORTRAN code by C. D. and Mike Healy, 1991
+    %
+    %   [ras,rap,tas,tap]=fresnel(theta,n);
+    %
+    %   where ras,rap,tas,tap are Reflection and Transmission
+    %         coeffcients for Amplitude for S and P polarization.
+    %   Input theta is in degrees, n is index of refracton, which may
+    %         be complex.
+    %
+    theta=thetad*pi/180; 
+    %     amplitude reflection coefficient s polarized
+    ras=(cos(theta)-sqrt(n.^2-(sin(theta)).^2))./...
+           (cos(theta)+sqrt(n.^2-(sin(theta)).^2));
+    %     amplitude reflection coefficient p polarized
+    rap=-( sqrt(n.^2-(sin(theta)).^2) -n.^2.*cos(theta) )./...
+          ( sqrt(n.^2-(sin(theta)).^2) +n.^2.*cos(theta) );
+    %     amplitude transmission coefficient s polarized
+    tas=1.+ras;
+    %     amplitude transmission coefficient p polarized
+    tap=(1.+rap)./n;
+    end
+
+    % Define the range of incidence angles from 0 to 90 degrees    
+    xaxis = linspace(0,90,90);
+
+    % Initialize array to store reflected intensity values
+    reflection_values = zeros(1, length(xaxis));
+    
+    % Calculate reflected intensity for each angle
+    for i = 1:length(xaxis)
+        % Get the angle from the xaxis array 
+        % and calculate reflection coefficients
+        [ras,rap] = fresnel(xaxis(i),0.6); % xaxis(i), as opposed 
+        % to just i,ensures that the correct angle value is passed to the 
+        % fresnel function.
+        reflection_values(i) = ((ras^2) + (rap^2))/2;
+    end
+
+    % Plot the reflected intensity as a function of incidence angle
+    plot(xaxis,reflection_values)
+    title('Reflection vs. Theta')
+    xlabel('Theta (Degrees)')
+    ylabel('Reflection')
+
+end\end{lstlisting}
+
+The figure below shows the result of the MATLAB code.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{m_2024_summer1_eece4649_hw1_q3_b.pdf}
+    \caption{Reflection as for $\theta$ between \(0^\circ\) and \(90^\circ\)}
+    \label{fig:reflection}
+\end{figure}
+
 
 \newpage
 \section*{Problem 4}
-\subsection*{(a)}
-\subsection*{(b)}
-\subsection*{(c)}
-\subsection*{(d)}
+\addcontentsline{toc}{section}{Problem 4}
+\subsection*{Problem 4, Part (a)}
+\addcontentsline{toc}{subsection}{Problem 4, Part (a)}
+Assuming the lens has a numerical aperture \textit{NA} = 0.9, , it is asked to calulate the minimium spot size (\textit{d}) for green light ($\lambda_g$ = 532 \textit{ nm}) and near-infrared light (NIR, $\lambda_r$ = 1152 \textit{ nm}).
+The minimum spot size is calculated as the wavelength over the numerical aperture.
+\begin{itemize}
+    \item Green light:
+\[
+d_g = \frac{\lambda_g}{NA} = \frac{532 \textit{ nm}}{0.9} = 591 \textit{ nm}
+\]
+    \item NIR light:
+\[
+d_r = \frac{\lambda_r}{NA} = \frac{1152 \textit{ nm}}{0.9} = 1280 \textit{ nm}
+\]
+\end{itemize}
+\subsection*{Problem 4, Part (b)}
+\addcontentsline{toc}{subsection}{Problem 4, Part (b)}
+For both lights it is calculated the depth of focus ($\Delta z$) in air, which index of reflection, \textit{n}, is considered as 1.
+The equation for the depth of focus is:
+\[
+\Delta z = \frac{n \lambda}{{NA}^2}
+\]
+where the calculation is direct.
+\begin{itemize}
+    \item Green light
+    \[
+    \Delta z_g = \frac{n \lambda_g}{{NA}^2} = \frac{1 \times 532 \textit{ nm}}{{0.9}^2} = 656.8 \approx 657 \textit{ nm}
+    \]
+    \item NIR light
+    \[
+    \Delta z_r = \frac{n \lambda_r}{{NA}^2} = \frac{1 \times 1152 \textit{ nm}}{{0.9}^2} = 1422 \textit{ nm}
+    \]
+\end{itemize}
+
+
+\subsection*{Problem 4, Part (c)}
+\addcontentsline{toc}{subsection}{Problem 4, Part (c)}
+The previous calculations are replicated but considering that the numerical aperture is now 0.04.
+\begin{itemize}
+    \item Green light:
+\[
+d_{bg} = \frac{\lambda_g}{NA} = \frac{532 \textit{ nm}}{0.04} = 13300 \textit{ nm}
+\]
+\[
+\Delta z_g = \frac{n \lambda_g}{{NA}^2} = \frac{1 \times 532 \textit{ nm}}{{0.04}^2} = 332500 \textit{ nm}
+\]
+    \item NIR light:
+\[
+d_{br} = \frac{\lambda_r}{NA} = \frac{1152 \textit{ nm}}{0.04} = 28800 \textit{ nm}
+\]
+\[
+\Delta z_r = \frac{n \lambda_r}{{NA}^2} = \frac{1 \times 1152 \textit{ nm}}{{0.04}^2} = 720000 \textit{ nm}
+\]
+\end{itemize}
+The numerical aperture represents a lens's ability to collect light and resolve fine details: a higher \textit{NA} gathers more light at wider angles, resulting in images of more resolution. On the other hand, the depth of focus refers t the range of distances in front of the lens that appear sharp in an image. When an object is outside this zone, it appears blurry: a larger depth of focus means more objects at various distances are in focus at the same time. Then, decreasing the numerical aperture increases the depth of focus as the rays experience less bending, allowing greater range of distances to be focused on the image.
+\subsection*{Problem 4, Part (d)}
+\addcontentsline{toc}{subsection}{Problem 4, Part (d)}
+It is asked to determine the beam diameter ($d_b$) so that the depth of focus ($\Delta z$) of X-ray covers the whole body, knowing that:
+\begin{itemize}
+    \item The X-ray beam has a wavelength $\lambda = 1 \textit{ nm}$.
+    \item Imaging means passing through 25 {\textit{cm}} of tissue $(\Delta z = 0.25 \textit{ m})$.
+    \item It is assumed that the beam is Gaussian.
+\end{itemize}
+\textbf{Rayleigh length} is the distance over which a Gaussian beam maintains its focus, and it is given by:
+\[ 
+    Z_r = \frac{\pi \times {\omega_0}^2}{\lambda}
+\]
+Where $\omega_0$ is the beam radius.
+
+As the depth of focus needs to cover the entire tissue thickness, and the lens duplicates the distance from the minimum spot size, $2 \times \Delta z$ has to be equal or greater than $Z_r$, as follows.
+\[
+    2\times\Delta z = 2\times\frac{\pi \times {\omega_0}^2}{\lambda}
+\]
+Which is equivalent to:
+\[
+    \Delta z = \frac{\pi \times {\omega_0}^2}{\lambda}
+\]
+Solving for the beam radius , $\omega_0$:
+\[
+\omega_0 = \sqrt{\frac{\Delta z\times\lambda}{\pi}} = \sqrt{\frac{0.25\textit{ m}\times10^{-9}\textit{ m}}{\pi}} = 8.92\times10^{-6}\textit{ m} = 8.92 \mu\textit{m}
+\]
+In consequence, the initial diameter of the X-ray beam would need to be $2\times\omega_0 = 1.78 \times10^{-5} \textit{m}$ or less in order to achieve the required focus of 25 \textit{cm}.
 \end{document}
